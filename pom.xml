@@ -7,7 +7,7 @@
   <description>Some takes framework utilities</description>
   
   <properties>
-    <log4j.version>2.11.2</log4j.version>
+    <log4j.version>2.13.3</log4j.version>
     <java.version>1.8</java.version>
   </properties>
   
