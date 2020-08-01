@@ -25,12 +25,14 @@ package com.minlessika.db;
 
 import java.sql.Connection;
 
+import javax.sql.DataSource;
+
 /**
  * A database
  * 
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  */
-public interface Database {
+public interface Database extends DataSource {
 	
 	/**
 	 * Start database. place to do some initializations
@@ -42,6 +44,14 @@ public interface Database {
 	 * @return connection
 	 */
 	Connection getConnection();
+	
+	/**
+	 * Get a connection to database with credentials
+	 * @param username Username
+	 * @param password Password
+	 * @return Connection
+	 */
+	Connection getConnection(String username, String password);
 	
 	/**
 	 * remove a target connection

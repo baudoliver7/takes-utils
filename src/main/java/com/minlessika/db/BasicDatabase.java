@@ -23,8 +23,10 @@
  */
 package com.minlessika.db;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -38,7 +40,7 @@ import com.minlessika.exceptions.DatabaseException;
 /**
  * A basic database
  * 
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  */
 public final class BasicDatabase implements Database {
 
@@ -172,5 +174,45 @@ public final class BasicDatabase implements Database {
 	@Override
 	public void start() {
 		logger.info("Database started !");
+	}
+
+	@Override
+	public Connection getConnection(String username, String password) {
+		throw new UnsupportedOperationException("BasicDatabase#getConnection"); 
+	}
+
+	@Override
+	public PrintWriter getLogWriter() throws SQLException {
+		return source.getLogWriter();
+	}
+
+	@Override
+	public void setLogWriter(PrintWriter out) throws SQLException {
+		source.setLogWriter(out);
+	}
+
+	@Override
+	public void setLoginTimeout(int seconds) throws SQLException {
+		source.setLoginTimeout(seconds);
+	}
+
+	@Override
+	public int getLoginTimeout() throws SQLException {
+		return source.getLoginTimeout();
+	}
+
+	@Override
+	public java.util.logging.Logger getParentLogger() throws SQLFeatureNotSupportedException {
+		return source.getParentLogger();
+	}
+
+	@Override
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+		return source.unwrap(iface);
+	}
+
+	@Override
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		return source.isWrapperFor(iface);
 	}
 }

@@ -45,7 +45,7 @@ import java.util.concurrent.Executor;
 /**
  * A database connection which closes depending on database auto commit state
  * 
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  */
 public final class DbConnection implements Connection {
 

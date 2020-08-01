@@ -23,7 +23,11 @@
  */
 package com.minlessika.db;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
+import java.util.logging.Logger;
 
 import com.minlessika.exceptions.DatabaseException;
 
@@ -35,7 +39,7 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 /**
  * Database decorator to apply database schema updates from liquibase files at starting
  * 
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  *
  */
 public final class DatabaseLiquibaseUpdate extends WrapDatabase implements Database {
@@ -78,6 +82,46 @@ public final class DatabaseLiquibaseUpdate extends WrapDatabase implements Datab
 		}	
 		
 		super.start();
+	}
+
+	@Override
+	public PrintWriter getLogWriter() throws SQLException {
+		return origin.getLogWriter();
+	}
+
+	@Override
+	public void setLogWriter(PrintWriter out) throws SQLException {
+		origin.setLogWriter(out);
+	}
+
+	@Override
+	public void setLoginTimeout(int seconds) throws SQLException {
+		origin.setLoginTimeout(seconds);
+	}
+
+	@Override
+	public int getLoginTimeout() throws SQLException {
+		return origin.getLoginTimeout();
+	}
+
+	@Override
+	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+		return origin.getParentLogger();
+	}
+
+	@Override
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+		return origin.unwrap(iface);
+	}
+
+	@Override
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		return origin.isWrapperFor(iface);
+	}
+
+	@Override
+	public Connection getConnection(String username, String password) {
+		return origin.getConnection(username, password);
 	}
 
 }
