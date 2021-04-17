@@ -23,8 +23,6 @@
  */
 package com.minlessika.db;
 
-import java.sql.Connection;
-
 import javax.sql.DataSource;
 
 /**
@@ -38,32 +36,6 @@ public interface Database extends DataSource {
 	 * Start database. place to do some initializations
 	 */
 	void start();
-	
-	/**
-	 * Get a connection to database
-	 * @return connection
-	 */
-	Connection getConnection();
-	
-	/**
-	 * Get a connection to database with credentials
-	 * @param username Username
-	 * @param password Password
-	 * @return Connection
-	 */
-	Connection getConnection(String username, String password);
-	
-	/**
-	 * remove a target connection
-	 * @param connection Connection to remove
-	 */
-	void removeConnection(Connection connection);
-	
-	/**
-	 * Get number of available connections
-	 * @return number
-	 */
-	int numberOfAvailableConnections();
 	
 	/**
 	 * starts transaction

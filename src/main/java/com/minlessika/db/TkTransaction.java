@@ -28,8 +28,6 @@ import org.slf4j.LoggerFactory;
 import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
-
-import com.minlessika.db.Database;
 import com.minlessika.exceptions.DatabaseException;
 
 /**

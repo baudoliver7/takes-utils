@@ -47,7 +47,7 @@ import java.util.concurrent.Executor;
  * 
  * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  */
-public final class DbConnection implements Connection {
+public final class ClosedShieldConnection implements Connection {
 
 	/**
 	 * Connection wrapped
@@ -55,18 +55,11 @@ public final class DbConnection implements Connection {
 	private final Connection origin;
 	
 	/**
-	 * Database
-	 */
-	private final Database source;
-	
-	/**
 	 * Ctor.
 	 * @param origin connection wrapped
-	 * @param source Database
 	 */
-	public DbConnection(final Connection origin, final Database source) {
+	public ClosedShieldConnection(final Connection origin) {
 		this.origin = origin;
-		this.source = source;
 	}
 	
 	@Override
@@ -101,7 +94,7 @@ public final class DbConnection implements Connection {
 
 	@Override
 	public void setAutoCommit(boolean autoCommit) throws SQLException {
-		origin.setAutoCommit(autoCommit);
+		// Do nothing
 	}
 
 	@Override
@@ -111,20 +104,17 @@ public final class DbConnection implements Connection {
 
 	@Override
 	public void commit() throws SQLException {
-		origin.commit();
+		// Do nothing
 	}
 
 	@Override
 	public void rollback() throws SQLException {
-		origin.rollback();
+		// Do nothing
 	}
 
 	@Override
 	public void close() throws SQLException {
-		if(!source.transactionStarted()) {
-			origin.close();
-			source.removeConnection(this);
-		}
+		// Do nothing
 	}
 
 	@Override

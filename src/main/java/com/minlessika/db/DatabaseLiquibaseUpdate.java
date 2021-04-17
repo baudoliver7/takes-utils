@@ -120,7 +120,7 @@ public final class DatabaseLiquibaseUpdate extends WrapDatabase implements Datab
 	}
 
 	@Override
-	public Connection getConnection(String username, String password) {
+	public Connection getConnection(String username, String password) throws SQLException {
 		return origin.getConnection(username, password);
 	}
 

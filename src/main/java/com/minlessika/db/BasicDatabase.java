@@ -27,11 +27,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,8 +47,6 @@ public final class BasicDatabase implements Database {
 	 */
 	private static final ThreadLocal<Connection> connection = new ThreadLocal<>();
 	
-	private static final ThreadLocal<List<Connection>> availableConnections = new ThreadLocal<>();
-	
 	/**
 	 * Data source of database
 	 */
@@ -69,47 +63,31 @@ public final class BasicDatabase implements Database {
 	
 	@Override
 	public Connection getConnection() {
-		
 		try {
 			if(transactionStarted()) {
-				return connection.get();		
+				return new ClosedShieldConnection(connection.get());		
 			} else {
-				final Connection newConnection = new DbConnection(source.getConnection(), this);
-				registerConnection(newConnection);
-				return newConnection;
+				return source.getConnection();
 			}
 		} catch (SQLException e) {
 			throw new DatabaseException(e);
 		}	
 		
 	}
-	
-	private synchronized void registerConnection(Connection newConnection) {
-		if(availableConnections.get() == null) {
-			final List<Connection> initialList = new CopyOnWriteArrayList<>();
-			initialList.add(newConnection);
-			availableConnections.set(initialList);
-		} else {
-			availableConnections.get().add(newConnection);
-		}
-	}
 
 	@Override
-	public void commit() {
-		
+	public void commit() {	
 		if(transactionStarted()) {
 			try {
 				connection.get().commit();				
 			} catch (SQLException e) {
 				throw new DatabaseException(e);
 			}				
-		}
-		
+		}	
 	}
 	
 	@Override
-	public void rollback() {
-		
+	public void rollback() {	
 		if(transactionStarted()) {
 			try {
 				connection.get().rollback();
@@ -129,7 +107,7 @@ public final class BasicDatabase implements Database {
 	public void startTransaction() {		
 		if(!transactionStarted()) {			
 			try {
-				final Connection newConnection = new DbConnection(source.getConnection(), this);
+				final Connection newConnection = source.getConnection();
 				newConnection.setAutoCommit(false);
 				newConnection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 				connection.set(newConnection);
@@ -144,31 +122,13 @@ public final class BasicDatabase implements Database {
 		
 		try {
 			if(transactionStarted()) {
-				final Connection transactionalConnection = connection.get();
+				final Connection conn = connection.get();
 				connection.remove();
-				transactionalConnection.close();
+				conn.close();
 			}
 		} catch (SQLException e) {
 			throw new DatabaseException(e);
 		}	
-	}
-
-	@Override
-	public synchronized void removeConnection(Connection connection) {
-		if(availableConnections.get() == null) {
-			final List<Connection> initialList = new CopyOnWriteArrayList<>();
-			availableConnections.set(initialList);
-		} else {
-			availableConnections.get().remove(connection);
-		}
-	}
-
-	@Override
-	public synchronized int numberOfAvailableConnections() {
-		if(availableConnections.get() == null)
-			return 0;
-		else
-			return availableConnections.get().size();
 	}
 
 	@Override

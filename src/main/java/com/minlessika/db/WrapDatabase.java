@@ -23,7 +23,11 @@
  */
 package com.minlessika.db;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
+import java.util.logging.Logger;
 
 /**
  * Wrapper for database
@@ -52,21 +56,6 @@ public abstract class WrapDatabase implements Database {
 	}
 
 	@Override
-	public Connection getConnection() {
-		return origin.getConnection();
-	}
-
-	@Override
-	public void removeConnection(Connection connection) {
-		origin.removeConnection(connection);
-	}
-
-	@Override
-	public int numberOfAvailableConnections() {
-		return origin.numberOfAvailableConnections();
-	}
-
-	@Override
 	public void startTransaction() {
 		origin.startTransaction();
 	}
@@ -89,6 +78,51 @@ public abstract class WrapDatabase implements Database {
 	@Override
 	public boolean transactionStarted() {
 		return origin.transactionStarted();
+	}
+
+	@Override
+	public Connection getConnection() throws SQLException {
+		return origin.getConnection();
+	}
+
+	@Override
+	public Connection getConnection(String username, String password) throws SQLException {
+		return origin.getConnection(username, password);
+	}
+
+	@Override
+	public PrintWriter getLogWriter() throws SQLException {
+		return origin.getLogWriter();
+	}
+
+	@Override
+	public void setLogWriter(PrintWriter out) throws SQLException {
+		origin.setLogWriter(out);
+	}
+
+	@Override
+	public void setLoginTimeout(int seconds) throws SQLException {
+		origin.setLoginTimeout(seconds);
+	}
+
+	@Override
+	public int getLoginTimeout() throws SQLException {
+		return origin.getLoginTimeout();
+	}
+
+	@Override
+	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+		return origin.getParentLogger();
+	}
+
+	@Override
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+		return origin.unwrap(iface);
+	}
+
+	@Override
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		return origin.isWrapperFor(iface);
 	}
 
 }
