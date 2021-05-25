@@ -62,7 +62,7 @@ public final class BasicDatabase implements Database {
 	}
 	
 	@Override
-	public Connection getConnection() {
+	public synchronized Connection getConnection() {
 		try {
 			if(transactionStarted()) {
 				return new ClosedShieldConnection(connection.get());		
@@ -76,7 +76,7 @@ public final class BasicDatabase implements Database {
 	}
 
 	@Override
-	public void commit() {	
+	public synchronized void commit() {	
 		if(transactionStarted()) {
 			try {
 				connection.get().commit();				
@@ -87,7 +87,7 @@ public final class BasicDatabase implements Database {
 	}
 	
 	@Override
-	public void rollback() {	
+	public synchronized void rollback() {	
 		if(transactionStarted()) {
 			try {
 				connection.get().rollback();
@@ -104,7 +104,7 @@ public final class BasicDatabase implements Database {
 	}
 
 	@Override
-	public void startTransaction() {		
+	public synchronized void startTransaction() {		
 		if(!transactionStarted()) {			
 			try {
 				final Connection newConnection = source.getConnection();
@@ -118,7 +118,7 @@ public final class BasicDatabase implements Database {
 	}
 
 	@Override
-	public void terminateTransaction() {
+	public synchronized void terminateTransaction() {
 		
 		try {
 			if(transactionStarted()) {
