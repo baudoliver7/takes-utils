@@ -30,7 +30,6 @@ import java.sql.SQLFeatureNotSupportedException;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.minlessika.exceptions.DatabaseException;
 
 /**
@@ -62,7 +61,7 @@ public final class BasicDatabase implements Database {
 	}
 	
 	@Override
-	public synchronized Connection getConnection() {
+	public Connection getConnection() {
 		try {
 			if(transactionStarted()) {
 				return new ClosedShieldConnection(connection.get());		
@@ -76,7 +75,7 @@ public final class BasicDatabase implements Database {
 	}
 
 	@Override
-	public synchronized void commit() {	
+	public void commit() {	
 		if(transactionStarted()) {
 			try {
 				connection.get().commit();				
@@ -87,7 +86,7 @@ public final class BasicDatabase implements Database {
 	}
 	
 	@Override
-	public synchronized void rollback() {	
+	public void rollback() {	
 		if(transactionStarted()) {
 			try {
 				connection.get().rollback();
@@ -104,7 +103,7 @@ public final class BasicDatabase implements Database {
 	}
 
 	@Override
-	public synchronized void startTransaction() {		
+	public void startTransaction() {		
 		if(!transactionStarted()) {			
 			try {
 				final Connection newConnection = source.getConnection();
@@ -118,7 +117,7 @@ public final class BasicDatabase implements Database {
 	}
 
 	@Override
-	public synchronized void terminateTransaction() {
+	public void terminateTransaction() {
 		
 		try {
 			if(transactionStarted()) {

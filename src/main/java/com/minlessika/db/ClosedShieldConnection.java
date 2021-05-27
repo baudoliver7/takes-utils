@@ -336,4 +336,8 @@ public final class ClosedShieldConnection implements Connection {
 		return origin.getNetworkTimeout();
 	}
 
+	@Override
+	public String toString() {
+		return this.origin.toString();
+	}
 }

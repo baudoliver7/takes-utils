@@ -27,10 +27,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
+import java.sql.Statement;
 import java.util.logging.Logger;
-
 import com.minlessika.exceptions.DatabaseException;
-
 import liquibase.Liquibase;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
@@ -63,7 +62,11 @@ public final class DatabaseLiquibaseUpdate extends WrapDatabase implements Datab
 		try (
         		final Connection connection = getConnection()
         ) {      	
-        	       	
+        	try (Statement smt = connection.createStatement()) {
+        		smt.execute("UPDATE DATABASECHANGELOGLOCK SET LOCKED=false, LOCKGRANTED=null, LOCKEDBY=null where ID=1");
+        	} catch (SQLException ex) {
+        		
+        	}
         	final liquibase.database.Database database = DatabaseFactory.getInstance()
 																		 .findCorrectDatabaseImplementation(
 																			 new JdbcConnection(connection)
