@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.minlessika</groupId>
@@ -5,90 +6,129 @@
   <version>0.1.0</version>
   <name>Takes utilities</name>
   <description>Some takes framework utilities</description>
-  
+  <url>https://github.com/Minlessika/takes-utils</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://github.com/Minlessika/takes-utils/LICENSE.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>1</id>
+      <name>Olivier B. OURA</name>
+      <email>baudolivier.oura@minlessika.com</email>
+      <organization>Minlessika</organization>
+      <organizationUrl>https://github.com/Minlessika</organizationUrl>
+      <roles>
+        <role>Architect</role>
+        <role>Developer</role>
+      </roles>
+      <timezone>0</timezone>
+    </developer>
+  </developers>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/Minlessika/takes-utils/issues</url>
+  </issueManagement>
+  <scm>
+    <connection>scm:git:git://github.com/Minlessika/takes-utils.git</connection>
+    <developerConnection>scm:git:git://github.com:Minlessika/takes-utils.git</developerConnection>
+    <url>http://github.com/Minlessika/takes-utils/tree/master</url>
+  </scm>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
   <properties>
-    <log4j.version>2.13.3</log4j.version>
     <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <log4j.version>2.13.3</log4j.version>
   </properties>
-  
   <dependencies>
-	<dependency>
-	    <groupId>org.takes</groupId>
-	    <artifactId>takes</artifactId>
-	    <version>1.19</version>
-	</dependency>   
-	<dependency>
-	    <groupId>com.jcabi.incubator</groupId>
-	    <artifactId>xembly</artifactId>
-	    <version>0.23.0</version>
-	</dependency>
-	<dependency>
-	    <groupId>org.junit.jupiter</groupId>
-	    <artifactId>junit-jupiter</artifactId>
-	    <version>5.7.2</version>
-	    <scope>test</scope>
-	</dependency>
-	<dependency>
-    <groupId>com.h2database</groupId>
-	    <artifactId>h2</artifactId>
-	    <version>1.4.200</version>
-	    <scope>test</scope>
-	</dependency>
-	<dependency>
-	    <groupId>com.minlessika.incubator</groupId>
-	    <artifactId>lightweight-db</artifactId>
-	    <version>0.2.0</version>
-	    <scope>test</scope>
-	</dependency>
-	<dependency>
-	    <groupId>org.hamcrest</groupId>
-	    <artifactId>hamcrest-all</artifactId>
-	    <version>1.3</version>
-	    <scope>test</scope>
-	</dependency>
-	<dependency>
-	    <groupId>org.slf4j</groupId>
-	    <artifactId>slf4j-api</artifactId>
-	    <version>1.7.30</version>
-	</dependency>  
-	<!-- a slf4j decorator -->
-	<dependency>
-	    <groupId>com.jcabi</groupId>
-	    <artifactId>jcabi-log</artifactId>
-	    <version>0.18.1</version>
-	</dependency>	
-	<!-- an implementation of slf4j -->  
     <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>${log4j.version}</version>
+      <groupId>org.takes</groupId>
+      <artifactId>takes</artifactId>
+      <version>1.19</version>
     </dependency>
     <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>${log4j.version}</version>
+      <groupId>com.jcabi.incubator</groupId>
+      <artifactId>xembly</artifactId>
+      <version>0.23.0</version>
     </dependency>
     <dependency>
-	    <groupId>org.apache.logging.log4j</groupId>
-	    <artifactId>log4j-slf4j-impl</artifactId>
-	    <version>${log4j.version}</version>
-	</dependency>
-	<dependency>
-	    <groupId>org.liquibase</groupId>
-	    <artifactId>liquibase-core</artifactId>
-	    <version>3.2.2</version>
-	</dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.7.2</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
-	    <groupId>javax.json</groupId>
-	    <artifactId>javax.json-api</artifactId>
-	    <version>1.1</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.glassfish</groupId>
-	  <artifactId>javax.json</artifactId>
-	  <version>1.1</version>
-	</dependency>
-	<dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.200</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.minlessika.incubator</groupId>
+      <artifactId>lightweight-db</artifactId>
+      <version>0.2.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <version>1.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.30</version>
+    </dependency>
+    <!-- a slf4j decorator -->
+    <dependency>
+      <groupId>com.jcabi</groupId>
+      <artifactId>jcabi-log</artifactId>
+      <version>0.18.1</version>
+    </dependency>
+    <!-- an implementation of slf4j -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>3.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.json</groupId>
+      <artifactId>javax.json-api</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.json</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
       <groupId>com.jcabi</groupId>
       <artifactId>jcabi-http</artifactId>
       <version>1.17.1</version>
@@ -100,37 +140,158 @@
       <version>1.18.16</version>
     </dependency>
     <dependency>
-	    <groupId>com.restfb</groupId>
-	    <artifactId>restfb</artifactId>
-	    <version>3.11.0</version>
-	</dependency>
-	<dependency>
-	    <groupId>com.jcabi</groupId>
-	    <artifactId>jcabi-jdbc</artifactId>
-	    <version>0.17.3</version>
-	</dependency>
-	<dependency>
-	    <groupId>commons-io</groupId>
-	    <artifactId>commons-io</artifactId>
-	    <version>2.7</version>
-	</dependency>
-	<dependency>
-	    <groupId>commons-codec</groupId>
-	    <artifactId>commons-codec</artifactId>
-	    <version>1.15</version>
-	</dependency>
+      <groupId>com.restfb</groupId>
+      <artifactId>restfb</artifactId>
+      <version>3.11.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jcabi</groupId>
+      <artifactId>jcabi-jdbc</artifactId>
+      <version>0.17.3</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.7</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.15</version>
+    </dependency>
   </dependencies>
-  
   <build>
-  	<plugins>
+    <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.5.1</version>
+        <version>3.7.0</version>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>
         </configuration>
       </plugin>
-   </plugins>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5</version>
+          <configuration>
+            <useReleaseProfile>false</useReleaseProfile>
+            <releaseProfiles>release</releaseProfiles>
+            <goals>deploy</goals>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
+  <profiles>
+    <profile>
+      <id>qulice</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.qulice</groupId>
+            <artifactId>qulice-maven-plugin</artifactId>
+            <version>0.18.19</version>
+            <configuration>
+              <license>file:${basedir}/LICENSE.txt</license>
+              <excludes>
+                <exclude>checkstyle:/src/main/resources/.*</exclude>
+                <exclude>duplicatefinder:.*</exclude>
+                <exclude>dependencies:.*</exclude>
+              </excludes>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>site</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.7</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.0.1</version>
+            <configuration>
+              <tags>
+                <tag>
+                  <name>checkstyle</name>
+                  <placement>X</placement>
+                </tag>
+              </tags>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-deploy-plugin</artifactId>
+            <version>2.8.2</version>
+            <executions>
+              <execution>
+                <id>default-deploy</id>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>deploy</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
