@@ -43,6 +43,7 @@ final class AutoCommitDatabaseTest {
 		}
 	}
 
+	@SuppressWarnings("try")
 	@RepeatedTest(value = 100)
 	public void autoCloseConnection() throws SQLException {
 		try(Connection conn = dbase.getConnection()) {
