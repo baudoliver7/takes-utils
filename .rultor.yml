@@ -11,6 +11,6 @@ install: |
   export LANGUAGE=en_US.UTF-8
 merge:
   script: |
-    mvn clean install -Pqulice --errors
+    mvn clean install --errors
     mvn clean site -Psite --errors
     pdd --source=$(pwd) --verbose --file=/dev/null
