@@ -1,7 +1,8 @@
 docker:
   image: yegor256/rultor-image:1.3
 assets:
-  settings.xml: yegor256/home#assets/takes/settings.xml
+  settings.xml: Minlessika/keys#settings.xml
+  pubring.kbx: Minlessika/keys#pubring.kbx
 architect:
   - baudoliver7
 install: |
@@ -11,6 +12,10 @@ install: |
   export LANGUAGE=en_US.UTF-8
 merge:
   script: |
-    mvn clean install --errors
-    mvn clean site -Psite --errors
+    mvn clean install --errors --settings /home/r/settings.xml
     pdd --source=$(pwd) --verbose --file=/dev/null
+release:
+  script: |-
+    mvn versions:set "-DnewVersion=${tag}"
+    git commit -am "${tag}"
+    mvn clean deploy -Psonar -Psonatype -Dinvoker.skip --errors --settings /home/r/settings.xml
