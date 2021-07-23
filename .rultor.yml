@@ -4,18 +4,25 @@ assets:
   private.key: Minlessika/keys#private.key
 architect:
   - baudoliver7
+env:
+  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
+  JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
+install: |
+  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+  sudo gem install pdd
+  sudo gem install xcop
+  pdd --file=/dev/null
 merge:
   fast-forward: only
   rebase: true
   script: |
-    mvn clean install --errors --settings /home/r/settings.xml
+    mvn clean install --errors -Dstyle.color=never
 release:
-    sensitive:
-     - settings.xml
     script: |-
      [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
      gpg --import /home/r/public.key
      gpg --allow-secret-key-import --import --batch --pinentry-mode=loopback /home/r/private.key 
      mvn versions:set "-DnewVersion=${tag}" --settings /home/r/settings.xml
      git commit -am "${tag}"
-     mvn clean deploy -Psonatype -Ptakes-utils --errors --settings /home/r/settings.xml
+     mvn clean install -Dinvoker.skip
+     mvn clean deploy -Psonatype -Ptakes-utils --errors --settings /home/r/settings.xml -Dstyle.color=never
