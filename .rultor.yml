@@ -1,6 +1,7 @@
 assets:
   settings.xml: Minlessika/keys#settings.xml
   pubring.kbx: Minlessika/keys#pubring.kbx
+  965D6EFF05524D18D31A4AC4D3259C0FA736F937.key: Minlessika/keys#965D6EFF05524D18D31A4AC4D3259C0FA736F937.key
 architect:
   - baudoliver7
 merge:
