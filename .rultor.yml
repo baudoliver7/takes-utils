@@ -13,7 +13,7 @@ release:
      - settings.xml
     script: |-
      [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
-     gpg --import /home/r/pubring.kbx
+     gpg --no-default-keyring --keyring /home/r/pubring.kbx  --export -a | gpg --import
      mvn versions:set "-DnewVersion=${tag}" --settings /home/r/settings.xml
      git commit -am "${tag}"
      mvn clean deploy -Psonatype --errors --settings /home/r/settings.xml
