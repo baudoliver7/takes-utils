@@ -1,7 +1,7 @@
 assets:
   settings.xml: Minlessika/keys#settings.xml
-  pubring.kbx: Minlessika/keys#pubring.kbx
-  965D6EFF05524D18D31A4AC4D3259C0FA736F937.key: Minlessika/keys#965D6EFF05524D18D31A4AC4D3259C0FA736F937.key
+  public.key: Minlessika/keys#public.key
+  private.key: Minlessika/keys#private.key
 architect:
   - baudoliver7
 merge:
@@ -15,8 +15,8 @@ release:
      - settings.xml
     script: |-
      [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
-     gpg --no-default-keyring --keyring /home/r/pubring.kbx  --export -a | gpg --import
-     gpg --import /home/r/965D6EFF05524D18D31A4AC4D3259C0FA736F937.key 
+     gpg --import /home/r/public.key
+     gpg --allow-secret-key-import --import /home/r/private.key 
      mvn versions:set "-DnewVersion=${tag}" --settings /home/r/settings.xml
      git commit -am "${tag}"
      mvn clean deploy -Psonatype -Ptakes-utils --errors --settings /home/r/settings.xml
