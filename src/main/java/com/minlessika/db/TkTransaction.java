@@ -53,8 +53,8 @@ public class TkTransaction implements Take {
 	
 	/**
 	 * 
-	 * @param origin
-	 * @param database
+	 * @param origin Origin
+	 * @param database Database
 	 */
 	public TkTransaction(final Take origin, final Database database) {
 		this.origin = origin;

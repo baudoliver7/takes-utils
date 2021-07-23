@@ -11,8 +11,8 @@ import java.util.Set;
  * 
  * @author Olivier B. OURA (baudoliver7@gmail.com)
  *
- * @param <K>
- * @param <V>
+ * @param <K> Key type
+ * @param <V> Value type
  */
 public final class CleanMap<K, V> implements Map<K, V> {
 
