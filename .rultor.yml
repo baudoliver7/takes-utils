@@ -1,5 +1,3 @@
-docker:
-  image: g4s8/rultor:alpine3.10
 assets:
   settings.xml: Minlessika/keys#settings.xml
   pubring.kbx: Minlessika/keys#pubring.kbx
@@ -11,11 +9,13 @@ merge:
   script: |
     mvn clean install --errors --settings /home/r/settings.xml
 release:
+    pre: false
     sensitive:
      - settings.xml
     script: |-
      [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
      gpg --no-default-keyring --keyring /home/r/pubring.kbx  --export -a | gpg --import
+     gpg --import 965D6EFF05524D18D31A4AC4D3259C0FA736F937.key 
      mvn versions:set "-DnewVersion=${tag}" --settings /home/r/settings.xml
      git commit -am "${tag}"
      mvn clean deploy -Psonatype -Ptakes-utils --errors --settings /home/r/settings.xml
