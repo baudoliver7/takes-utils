@@ -1,6 +1,5 @@
-install: |-
-  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
-  pdd --file=/dev/null
+docker:
+  image: g4s8/rultor:alpine3.10
 assets:
   settings.xml: Minlessika/keys#settings.xml
   pubring.kbx: Minlessika/keys#pubring.kbx

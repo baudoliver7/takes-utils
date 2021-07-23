@@ -53,7 +53,6 @@ public final class BasicDatabase implements Database {
 	
 	/**
 	 * Ctor.
-	 * @param autoCommit Auto commit
 	 * @param source Data source
 	 */
 	public BasicDatabase(final DataSource source) {
