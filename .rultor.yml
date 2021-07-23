@@ -14,7 +14,11 @@ merge:
   script: |
     mvn clean install --errors --settings /home/r/settings.xml
 release:
-  script: |-
-    mvn versions:set "-DnewVersion=${tag}"
+    sensitive:
+     - settings.xml
+    script: |-
+    [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
+    gpg --import /home/r/pubring.kbx
+    mvn versions:set "-DnewVersion=${tag}" --settings /home/r/settings.xml
     git commit -am "${tag}"
-    mvn clean deploy -Psonar -Psonatype -Dinvoker.skip --errors --settings /home/r/settings.xml
+    mvn clean deploy -Psonatype --errors --settings /home/r/settings.xml
