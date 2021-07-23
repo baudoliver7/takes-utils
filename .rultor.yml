@@ -16,4 +16,4 @@ merge:
     pdd --source=$(pwd) --verbose --file=/dev/null
 release:
   script: |-
-    cat ../settings.xml
+    cat /home/r/settings.xml
