@@ -11,7 +11,6 @@ merge:
   script: |
     mvn clean install --errors --settings /home/r/settings.xml
 release:
-    pre: false
     sensitive:
      - settings.xml
     script: |-
@@ -19,4 +18,4 @@ release:
      gpg --no-default-keyring --keyring /home/r/pubring.kbx  --export -a | gpg --import
      mvn versions:set "-DnewVersion=${tag}" --settings /home/r/settings.xml
      git commit -am "${tag}"
-     mvn clean deploy -Psonatype --errors --settings /home/r/settings.xml
+     mvn clean deploy -Psonatype -Ptakes-utils --errors --settings /home/r/settings.xml
