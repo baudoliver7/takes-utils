@@ -12,10 +12,10 @@ install: |
   export LANGUAGE=en_US.UTF-8
 merge:
   script: |
-    mvn clean install --errors --settings /home/r/settings.xml
+    mvn clean install --errors --settings ../settings.xml
     pdd --source=$(pwd) --verbose --file=/dev/null
 release:
   script: |-
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy -Psonar -Psonatype -Dinvoker.skip --errors --settings /home/r/settings.xml
+    mvn clean deploy -Psonar -Psonatype -Dinvoker.skip --errors --settings ../settings.xml
