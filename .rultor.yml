@@ -5,11 +5,6 @@ assets:
   pubring.kbx: Minlessika/keys#pubring.kbx
 architect:
   - baudoliver7
-install: |
-  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
-  export LC_ALL=en_US.UTF-8
-  export LANG=en_US.UTF-8
-  export LANGUAGE=en_US.UTF-8
 merge:
   script: |
     mvn clean install --errors --settings /home/r/settings.xml
