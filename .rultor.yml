@@ -1,14 +1,18 @@
-docker:
-  image: g4s8/rultor:alpine3.10
+install: |-
+  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+  pdd --file=/dev/null
 assets:
   settings.xml: Minlessika/keys#settings.xml
   pubring.kbx: Minlessika/keys#pubring.kbx
 architect:
   - baudoliver7
 merge:
+  fast-forward: only
+  rebase: true
   script: |
     mvn clean install --errors --settings /home/r/settings.xml
 release:
+    pre: false
     sensitive:
      - settings.xml
     script: |-
