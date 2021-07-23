@@ -16,6 +16,4 @@ merge:
     pdd --source=$(pwd) --verbose --file=/dev/null
 release:
   script: |-
-    mvn versions:set "-DnewVersion=${tag}"
-    git commit -am "${tag}"
-    mvn clean deploy -Psonar -Psonatype -Dinvoker.skip --errors --settings ../settings.xml
+    cat ../settings.xml
