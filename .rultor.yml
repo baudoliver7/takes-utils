@@ -16,7 +16,7 @@ release:
     script: |-
      [[ "${tag}" =~ ^[0-9]+(\.[0-9]+)*$ ]] || exit -1
      gpg --no-default-keyring --keyring /home/r/pubring.kbx  --export -a | gpg --import
-     gpg --import 965D6EFF05524D18D31A4AC4D3259C0FA736F937.key 
+     gpg --import /home/r/965D6EFF05524D18D31A4AC4D3259C0FA736F937.key 
      mvn versions:set "-DnewVersion=${tag}" --settings /home/r/settings.xml
      git commit -am "${tag}"
      mvn clean deploy -Psonatype -Ptakes-utils --errors --settings /home/r/settings.xml
