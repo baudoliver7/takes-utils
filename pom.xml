@@ -75,7 +75,7 @@ SOFTWARE.
     <url>http://www.rultor.com/s/takes-utils</url>
   </ciManagement>
   <distributionManagement>
-    <downloadUrl>https://oss.sonatype.org/content/groups/public</downloadUrl>
+    <downloadUrl>https://s01.oss.sonatype.org/content/groups/public</downloadUrl>
     <repository>
       <id>oss.sonatype.org</id>
       <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
@@ -237,6 +237,42 @@ SOFTWARE.
                 <phase>package</phase>
                 <goals>
                   <goal>sonar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <!--
+      The profile deploys all artifacts to oss.sonatype.org
+      repository (if you're registered there). It also skips
+      default deployment plugin.
+      @see http://www.jcabi.com/jcabi-parent/profile-sonatype.html
+      -->
+      <id>sonatype</id>
+      <build>
+      	<plugins>
+          <plugin>
+            <!-- @see http://www.sonatype.com/books/nexus-book/reference/staging-sect-deployment.html -->
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.7</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>oss.sonatype.org</serverId>
+              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+              <description>${project.version}</description>
+              <stagingProgressTimeoutMinutes>10</stagingProgressTimeoutMinutes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>jcabi-deploy-to-sonatype</id>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>deploy</goal>
+                  <goal>release</goal>
                 </goals>
               </execution>
             </executions>
