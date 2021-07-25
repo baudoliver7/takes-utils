@@ -1,4 +1,5 @@
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
+[![DevOps By Rultor.com](http://www.rultor.com/b/takes-utils/takes-utils)](http://www.rultor.com/p/takes-utils/takes-utils)
 
 [![Hits-of-Code](https://hitsofcode.com/github/Minlessika/takes-utils)](https://hitsofcode.com/github/Minlessika/takes-utils/view)
 
