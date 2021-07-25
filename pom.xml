@@ -31,7 +31,7 @@ SOFTWARE.
   </parent>
   <groupId>com.minlessika.incubator</groupId>
   <artifactId>takes-utils</artifactId>
-  <version>0.1.2-SNAPSHOT</version>
+  <version>0.1.2</version>
   <packaging>jar</packaging>
   <name>Takes utilities</name>
   <description>Some takes framework utilities</description>
