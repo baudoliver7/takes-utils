@@ -253,7 +253,7 @@ SOFTWARE.
       -->
       <id>sonatype</id>
       <build>
-      	<plugins>
+        <plugins>
           <plugin>
             <!-- @see http://www.sonatype.com/books/nexus-book/reference/staging-sect-deployment.html -->
             <groupId>org.sonatype.plugins</groupId>
