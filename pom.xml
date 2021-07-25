@@ -75,8 +75,17 @@ SOFTWARE.
     <url>http://www.rultor.com/s/takes-utils</url>
   </ciManagement>
   <distributionManagement>
+    <downloadUrl>https://oss.sonatype.org/content/groups/public</downloadUrl>
+    <repository>
+      <id>oss.sonatype.org</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+    </repository>
+    <snapshotRepository>
+      <id>oss.sonatype.org</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
     <site>
-      <id>github-pages</id>
+      <id>takes.utils.com</id>
       <url>https://github.com/Minlessika/takes-utils</url>
     </site>
   </distributionManagement>
