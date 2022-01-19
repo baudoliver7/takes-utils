@@ -8,7 +8,6 @@ env:
   MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
   JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
 install: |
-  sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
   sudo gem install xcop
 merge:
   fast-forward: only
