@@ -1,5 +1,6 @@
 package com.minlessika.db;
 
+import com.lightweight.db.EmbeddedPostgreSQLDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +15,6 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import com.jcabi.jdbc.JdbcSession;
 import com.jcabi.jdbc.Outcome;
-import com.minlessika.lightweight.db.EmbeddedPostgreSQLDataSource;
 
 final class TransactionalDatabaseTest {
 
