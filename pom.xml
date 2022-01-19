@@ -27,7 +27,7 @@ SOFTWARE.
     <artifactId>parent</artifactId>
     <version>0.51.3</version>
   </parent>
-  <groupId>com.minlessika.incubator</groupId>
+  <groupId>com.baudoliver7</groupId>
   <artifactId>takes-utils</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
