@@ -4,11 +4,10 @@ assets:
   private.key: baudoliver7/home#assets/private.key
 architect:
   - baudoliver7
-env:
-  MAVEN_OPTS: -XX:MaxPermSize=256m -Xmx1g
-  JAVA_OPTS: -XX:MaxPermSize=256m -Xmx1g
 install: |
+  sudo gem install pdd
   sudo gem install xcop
+  pdd --file=/dev/null
 merge:
   fast-forward: only
   rebase: true
@@ -22,4 +21,4 @@ release:
      mvn versions:set "-DnewVersion=${tag}"
      git commit -am "${tag}"
      mvn clean install -Dinvoker.skip
-     mvn clean deploy -Psonatype -Ptakes-utils --errors --settings /home/r/settings.xml -Dstyle.color=never
+     mvn clean deploy -Psonatype -Pbaudoliver7 --errors --settings /home/r/settings.xml -Dstyle.color=never
