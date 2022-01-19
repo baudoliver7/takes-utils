@@ -1,7 +1,7 @@
 [![EO principles respected here](https://www.elegantobjects.org/badge.svg)](https://www.elegantobjects.org)
 [![DevOps By Rultor.com](http://www.rultor.com/b/takes-utils/takes-utils)](http://www.rultor.com/p/takes-utils/takes-utils)
 
-[![Hits-of-Code](https://hitsofcode.com/github/Minlessika/takes-utils)](https://hitsofcode.com/github/Minlessika/takes-utils/view)
+[![Hits-of-Code](https://hitsofcode.com/github/baudoliver7/takes-utils)](https://hitsofcode.com/github/baudoliver7/takes-utils/view)
 
 Project architect: [baudoliver7](https://github.com/baudoliver7)
 
@@ -25,4 +25,4 @@ Keep in mind that JDK7 and Maven 3.1.0 are the lowest versions you may use.
 ## Got questions ?
 
 If you have questions or general suggestions, don't hesitate to submit
-a new [Github issue](https://github.com/Minlessika/takes-utils/issues/new).
+a new [Github issue](https://github.com/baudoliver7/takes-utils/issues/new).
