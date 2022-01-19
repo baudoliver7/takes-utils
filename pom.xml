@@ -102,9 +102,9 @@ SOFTWARE.
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.minlessika.incubator</groupId>
+      <groupId>com.baudoliver7</groupId>
       <artifactId>lightweight-db</artifactId>
-      <version>0.2.0</version>
+      <version>0.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
