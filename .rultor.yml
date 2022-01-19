@@ -1,7 +1,7 @@
 assets:
-  settings.xml: Minlessika/home#assets/settings.xml
-  public.key: Minlessika/home#assets/public.key
-  private.key: Minlessika/home#assets/private.key
+  settings.xml: baudoliver7/home#assets/settings.xml
+  public.key: baudoliver7/home#assets/public.key
+  private.key: baudoliver7/home#assets/private.key
 architect:
   - baudoliver7
 env:
