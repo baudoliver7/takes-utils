@@ -5,6 +5,9 @@ import com.jcabi.http.response.RestResponse;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 import org.hamcrest.Matchers;
@@ -14,6 +17,7 @@ import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.http.FtRemote;
 import org.takes.tk.TkClasspath;
+import org.takes.tk.TkFiles;
 import org.takes.tk.TkWithType;
 
 /**
@@ -68,5 +72,46 @@ final class TkCachedFilesITCase {
                 }
             );
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"txt", "TXT", "TXt"})
+    void cachesFileFromFileSystemTest(final String ext) throws Exception {
+        final Path path = Paths.get("./src/test/resources/file.txt");
+        final String content = Files.readAllLines(path).get(0);
+        new FtRemote(
+            new TkCachedFiles(
+                new TkFork(
+                    new FkRegex(
+                        "/file\\.txt",
+                        new TkWithType(new TkFiles("./src/test/resources"), "text/plain")
+                    )
+                ), TkCachedFilesITCase.MAX_AGE, "txt"
+            )
+        ).exec(
+            home -> {
+                final URI uri = home.resolve(String.format("/file.%s", ext));
+                final String etag = DigestUtils.md5Hex(content).toUpperCase();
+                new JdkRequest(uri)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertHeader(
+                        "Cache-Control",
+                        String.format("public, max-age=%s", TkCachedFilesITCase.MAX_AGE)
+                    )
+                    .assertHeader(
+                        "ETag",
+                        etag
+                    )
+                    .assertStatus(HttpURLConnection.HTTP_OK)
+                    .assertBody(Matchers.equalTo(content));
+                new JdkRequest(uri)
+                    .header("If-None-Match", etag)
+                    .fetch()
+                    .as(RestResponse.class)
+                    .assertStatus(HttpURLConnection.HTTP_NOT_MODIFIED)
+                    .assertBody(Matchers.isEmptyString());
+            }
+        );
     }
 }
