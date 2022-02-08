@@ -3,6 +3,8 @@ package com.minlessika.tk;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Locale;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.takes.Request;
 import org.takes.Response;
@@ -18,6 +20,8 @@ import org.apache.commons.io.IOUtils;
  * <p>It's used for fast pages loading with
  * a smart refresh of resources that have been changed
  * based on ETag.
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching">HTTP Caching</a>
+ * @since 0.2
  */
 public final class TkCachedFiles implements Take {
 
@@ -48,7 +52,7 @@ public final class TkCachedFiles implements Take {
 	/**
 	 * Ctor.
 	 * @param origin Origin
-	 * @param maxage Max age
+	 * @param maxage Max age in seconds
 	 * @param extensions Extensions
 	 */
 	public TkCachedFiles(final Take origin, final int maxage, final String... extensions) {
@@ -65,16 +69,16 @@ public final class TkCachedFiles implements Take {
 		if(
 			Arrays.stream(extensions)
 				.anyMatch(
-					ext -> location.endsWith(String.format(".%s", ext))
+					ext -> location.toLowerCase(Locale.ENGLISH).endsWith(
+						String.format(".%s", ext.toLowerCase(Locale.ENGLISH))
+					)
 				)
 		) {
-			try {
-				final InputStream input = this.getClass()
-                        .getResourceAsStream(location);
+			try (InputStream input = this.getClass().getResourceAsStream(location)) {
 				final String content = IOUtils.toString(input, "UTF-8");
 				final String etag = DigestUtils.md5Hex(content).toUpperCase();
 				final Iterator<String> ifnonematch = new RqHeaders.Base(req)
-		                .header("If-None-Match").iterator();
+					.header("If-None-Match").iterator();
 				if(ifnonematch.hasNext() && ifnonematch.next().equals(etag)) {
 					res = new RsWithStatus(304);
 				} else {
