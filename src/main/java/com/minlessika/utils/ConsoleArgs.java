@@ -26,9 +26,7 @@ public final class ConsoleArgs implements Args {
         for (final String arg : args) {
             final Matcher matcher = ptn.matcher(arg);
             if (!matcher.matches()) {
-                throw new IllegalStateException(
-                    String.format("can't parse this argument: '%s'", arg)
-                );
+                continue;
             }
             final String value = matcher.group(2);
             if (value == null) {
