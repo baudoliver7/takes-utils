@@ -39,7 +39,7 @@ import org.takes.Request;
  * <p>The class is immutable and thread-safe.
  *
  * @author Olivier B. OURA (baudolivier7@gmail.com)
- * @version $Id: 779c0427d23556145529c42dd67093987eee50e5 $
+ * @version $Id$
  * @see <a href="http://www.w3.org/TR/html401/interact/forms.html">
  *     Forms in HTML</a>
  * @see org.takes.rq.RqGreedy

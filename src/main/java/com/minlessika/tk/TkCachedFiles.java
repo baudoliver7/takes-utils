@@ -1,20 +1,17 @@
 package com.minlessika.tk;
 
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Locale;
-
 import org.apache.commons.codec.digest.DigestUtils;
-import org.takes.Request;
 import org.takes.Response;
 import org.takes.Take;
+import org.takes.misc.Href;
 import org.takes.rq.RqHeaders;
 import org.takes.rq.RqHref;
 import org.takes.rs.RsPrint;
 import org.takes.rs.RsWithHeaders;
 import org.takes.rs.RsWithStatus;
-import org.apache.commons.io.IOUtils;
 import org.takes.tk.TkWrap;
 
 /**
@@ -30,18 +27,17 @@ public final class TkCachedFiles extends TkWrap {
 	/**
 	 * Ctor.
 	 * @param origin Origin
-	 * @param maxage Max age in seconds
 	 * @param extensions Extensions
 	 */
-	public TkCachedFiles(final Take origin, final int maxage, final String... extensions) {
+	public TkCachedFiles(final Take origin, final String... extensions) {
 		super(
 			req -> {
-				final String location = new RqHref.Smart(req).href().path();
+				final Href href = new RqHref.Smart(req).href();
 				final Response resp;
 				if(
 					Arrays.stream(extensions)
 						.anyMatch(
-							ext -> location.toLowerCase(Locale.ENGLISH).endsWith(
+							ext -> href.path().toLowerCase(Locale.ENGLISH).endsWith(
 								String.format(".%s", ext.toLowerCase(Locale.ENGLISH))
 							)
 						)
@@ -56,7 +52,7 @@ public final class TkCachedFiles extends TkWrap {
 					} else {
 						resp = new RsWithHeaders(
 							origin.act(req),
-							String.format("Cache-Control: public, max-age=%s", maxage),
+							"Cache-Control: public, max-age=0, no-cache",
 							String.format("ETag: %s", etag)
 						);
 					}
